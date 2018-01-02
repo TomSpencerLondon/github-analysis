@@ -62,7 +62,7 @@ def fetchAndSaveCommitSearchDataSamplePages(date):
     print("Last page: " + str(lastPage)[0])
 
     samplePages = []
-    for i in range(2, min(lastPage,sample_size)+1):
+    for i in range(1, min(lastPage,sample_size)+1):
         chosenPage = i
         samplePages.append(chosenPage)
 
