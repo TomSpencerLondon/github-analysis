@@ -6,8 +6,9 @@ import re
 
 dataFolder = './data'
 
+
 def getCommitSearchFileName(date, page):
-    return os.path.join(dataFolder, f'commitSearch{date}-page[0-9]+\.json')
+    return os.path.join(dataFolder, f'commitSearch{date}-page{page}.json')
 
 def saveJSON(filename, data):
     with open (filename, 'w') as outfile:
@@ -25,7 +26,7 @@ def fetch(url, params, custom_headers, returnFunc):
             print(ex)
             resetTime = res.headers['X-RateLimit-Reset']
             if resetTime != None:
-                print(f"X-RateLimit-Remaining: {req.headers['X-RateLimit-Remaining']}")
+                print(f"X-RateLimit-Remaining: {res.headers['X-RateLimit-Remaining']}")
                 print(f"X-RatLimit-Reset: {datetime.datetime.fromtimestamp(int(resetTime))}")
                 print(res.headers)
             raise ex
@@ -51,6 +52,7 @@ def fetchAndSaveCommitSearchData(date, pages):
 
         with open(filename, 'w') as outfile:
             json.dump(data, outfile)
+        if
 
 def fetchAndSaveCommitSearchDataSamplePages(date):
     sample_size = 34
