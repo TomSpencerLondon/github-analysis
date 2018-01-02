@@ -1,6 +1,13 @@
 import requests
 import datetime
 import json
+import os
+import re
+
+dataFolder = './data'
+
+def getCommitSearchFileName(date, page):
+    return os.path.join(dataFolder, f'commitSearch{date}-page[0-9]+\.json')
 
 def saveJSON(filename, data):
     with open (filename, 'w') as outfile:
@@ -33,6 +40,40 @@ def fetchCommitSearchData(date, page, fetchFunc=fetchJSON):
     custom_headers = {"Accept":"application/vnd.github.cloak-preview"}
     return fetchFunc(url, params, custom_headers)
 
-result = fetchCommitSearchData(datetime.date(2017,12,1), 1)
+def fetchLinkHeader(url, params, custom_headers):
+    return fetch(url, params, custom_headers, lambda res: res.links)
 
-saveJSON("test.json", result)
+def fetchAndSaveCommitSearchData(date, pages):
+    for page in pages:
+        data = fetchCommitSearchData(date, page)
+
+        filename = getCommitSearchFileName(date, page)
+
+        with open(filename, 'w') as outfile:
+            json.dump(data, outfile)
+
+def fetchAndSaveCommitSearchDataSamplePages(date):
+    sample_size = 34
+
+    links = fetchCommitSearchData(date,1, fetchLinkHeader)
+    lastLink = links['last']['url']
+    lastPageStr = re.findall('page=[0-9]+', lastLink)[0]
+    lastPage = int(re.findall('[0-9]+', lastPageStr)[0])
+    print("Last page: " + str(lastPage)[0])
+
+    samplePages = []
+    for i in range(2, min(lastPage,sample_size)+1):
+        chosenPage = i
+        samplePages.append(chosenPage)
+
+    fetchAndSaveCommitSearchData(date, samplePages)
+
+print(fetchAndSaveCommitSearchDataSamplePages(datetime.date(2017,12,1)))
+
+
+
+
+
+# result = fetchCommitSearchData(datetime.date(2017,12,1), 1)
+
+# saveJSON("test.json", result)
