@@ -6,7 +6,6 @@ import re
 
 dataFolder = './data'
 
-
 def getCommitSearchFileName(date, page):
     return os.path.join(dataFolder, f'commitSearch{date}-page{page}.json')
 
@@ -52,7 +51,6 @@ def fetchAndSaveCommitSearchData(date, pages):
 
         with open(filename, 'w') as outfile:
             json.dump(data, outfile)
-        if
 
 def fetchAndSaveCommitSearchDataSamplePages(date):
     sample_size = 34
