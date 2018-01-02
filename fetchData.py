@@ -3,8 +3,11 @@ import datetime
 import json
 import os
 import re
+import time
 
 dataFolder = './data'
+
+DEFAULT_DELAY = 2.03
 
 def getCommitSearchFileName(date, page):
     return os.path.join(dataFolder, f'commitSearch{date}-page{page}.json')
@@ -51,6 +54,9 @@ def fetchAndSaveCommitSearchData(date, pages):
 
         with open(filename, 'w') as outfile:
             json.dump(data, outfile)
+
+        if DEFAULT_DELAY > 0:
+            time.sleep(DEFAULT_DELAY)
 
 def fetchAndSaveCommitSearchDataSamplePages(date):
     sample_size = 34
