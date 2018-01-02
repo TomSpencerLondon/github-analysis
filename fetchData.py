@@ -59,7 +59,7 @@ def fetchAndSaveCommitSearchDataSamplePages(date):
     lastLink = links['last']['url']
     lastPageStr = re.findall('page=[0-9]+', lastLink)[0]
     lastPage = int(re.findall('[0-9]+', lastPageStr)[0])
-    print("Last page: " + str(lastPage)[0])
+    print("Last page: " + str(lastPage))
 
     samplePages = []
     for i in range(1, min(lastPage,sample_size)+1):
@@ -68,9 +68,14 @@ def fetchAndSaveCommitSearchDataSamplePages(date):
 
     fetchAndSaveCommitSearchData(date, samplePages)
 
-print(fetchAndSaveCommitSearchDataSamplePages(datetime.date(2017,12,1)))
 
+def fetchAndSaveCommitSearchDataSamplePagesForDates(startDate, endDateInclusive):
+    date = startDate
+    while date <= endDateInclusive:
+        fetchAndSaveCommitSearchDataSamplePages(date)
+        date += datetime.timedelta(days=1)
 
+print(fetchAndSaveCommitSearchDataSamplePagesForDates(datetime.date(2017,12,5), datetime.date(2017,12,10)))
 
 
 
