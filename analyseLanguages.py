@@ -3,6 +3,8 @@ import datetime
 import os
 from shared import getSampleCommitsFileName
 
+includeExtensions = ["go", "cs", "c", "cpp", "java", "js", "py", "php"]
+
 def getExtensionsUsedInCommit(commit):
     exts = set()
     for file in commit["files"]:
@@ -61,7 +63,4 @@ def analyseLanguagesForDates(startDate, endDateInclusive):
         outfile.write(output)
 
 if __name__ == '__main__':
-    commits = getCommitsFromFile(datetime.date(2017,12,1))
-    extensions = getExtensionsUsedInCommit(commits[8])
-    print(extensions)
-    # print(getExtensionsUsedInCommit(commits[2]))
+    analyseLanguagesForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))

@@ -114,10 +114,5 @@ def fetchAndSaveSampleCommitsForDates(startDate, endDateInclusive):
 
 
 if __name__ == '__main__':
-# fetchAndSaveCommitSearchDataSamplePagesForDates(datetime.date(2017,12,8), datetime.date(2017,12,31))
-fetchAndSaveSampleCommitsForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
-
-
-# result = fetchCommitSearchData(datetime.date(2017,12,1), 1)
-
-# saveJSON("test.json", result)
+    fetchAndSaveCommitSearchDataSamplePagesForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
+    fetchAndSaveSampleCommitsForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
