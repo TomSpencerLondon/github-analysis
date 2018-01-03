@@ -11,7 +11,6 @@ dataFolder = './data'
 DEFAULT_DELAY = 2.03
 SAMPLE_COMMITS_PER_PAGE = 3
 
-
 def getSampleCommitFileName(date):
     return os.path.join(dataFolder, f'sampleCommit{date}.json')
 
@@ -136,7 +135,7 @@ def fetchAndSaveSampleCommitsForDates(startDate, endDateInclusive):
         date += datetime.timedelta(days=1)
 
 
-
+if __name__ == '__main__':
 # fetchAndSaveCommitSearchDataSamplePagesForDates(datetime.date(2017,12,8), datetime.date(2017,12,31))
 fetchAndSaveSampleCommitsForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
 
