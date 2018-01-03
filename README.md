@@ -22,10 +22,9 @@ Users who wish to change which languages are being analysed can change the inclu
 Due to the time taken to download the data there was only time to download data for December 2017. The results indicate a marked drop off by all languages over the Christmas period. There wasn’t a clear pattern of any particular language changing in popularity relative to others during the Christmas period.
 
 <img src="images/excelGraph.png">
-<img src="images/excelTable.png">git
-
-
 
 ## Conclusions and future development:
 
 The github API returns only a limited number of pages of results. A typical day would see around 700, 000 commits but the search API only returns 34 pages of results with 30 results per page. Therefore, the sample size is quite low. It is possible that with more data we would get a clearer picture from which to draw conclusions.
+
+<img src="images/excelTable.png" align="center">
