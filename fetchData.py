@@ -8,6 +8,7 @@ import random
 from shared import getCommitSearchFileName
 from shared import getSampleCommitsFileName
 from shared import findAllCommitSearchResultFilesForDate
+from shared import dataFolder
 
 DEFAULT_DELAY = 2.03
 SAMPLE_COMMITS_PER_PAGE = 10
@@ -114,5 +115,7 @@ def fetchAndSaveSampleCommitsForDates(startDate, endDateInclusive):
 
 
 if __name__ == '__main__':
+    if not os.path.exists(dataFolder):
+        os.makedirs(dataFolder)
     fetchAndSaveCommitSearchDataSamplePagesForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
     fetchAndSaveSampleCommitsForDates(datetime.date(2017,12,1), datetime.date(2017,12,31))
