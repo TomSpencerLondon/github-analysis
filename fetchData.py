@@ -5,35 +5,12 @@ import os
 import re
 import time
 import random
-
-dataFolder = './data'
+from shared import getCommitSearchFileName
+from shared import getSampleCommitsFileName
+from shared import findAllCommitSearchResultFilesForDate
 
 DEFAULT_DELAY = 2.03
-SAMPLE_COMMITS_PER_PAGE = 3
-
-def getSampleCommitFileName(date):
-    return os.path.join(dataFolder, f'sampleCommit{date}.json')
-
-def getCommitSearchFilePattern(date):
-    return f'commitSearch{date}-page[0-9]+\.json'
-
-def findAllFilesMatching(path, pattern):
-    results = []
-    with os.scandir(path) as listOfEntries:
-        for entry in listOfEntries:
-            if entry.is_file():
-                if re.search(pattern, entry.name) != None:
-                    results.append(os.path.join(dataFolder,entry.name))
-    return results
-
-def findAllCommitSearchResultFilesForDate(date):
-    pattern = getCommitSearchFilePattern(date)
-    return findAllFilesMatching(dataFolder, pattern)
-
-
-
-def getCommitSearchFileName(date, page):
-    return os.path.join(dataFolder, f'commitSearch{date}-page{page}.json')
+SAMPLE_COMMITS_PER_PAGE = 10
 
 def saveJSON(filename, data):
     with open (filename, 'w') as outfile:
@@ -114,6 +91,7 @@ def fetchSampleCommits(date):
             fileContents = infile.read()
         commitSearchDataPage = json.loads(fileContents)
 
+        #Choose several random commit per page
         allCommits = commitSearchDataPage["items"]
         numCommits = len(allCommits)
         if numCommits > 0:
@@ -130,7 +108,7 @@ def fetchAndSaveSampleCommitsForDates(startDate, endDateInclusive):
     date = startDate
     while date <= endDateInclusive:
         commits = fetchSampleCommits(date)
-        with open(getSampleCommitFileName(date), 'w') as outfile:
+        with open(getSampleCommitsFileName(date), 'w') as outfile:
             json.dump(commits, outfile)
         date += datetime.timedelta(days=1)
 
