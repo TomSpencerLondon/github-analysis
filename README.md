@@ -27,4 +27,6 @@ Due to the time taken to download the data there was only time to download data 
 
 The github API returns only a limited number of pages of results. A typical day would see around 700, 000 commits but the search API only returns 34 pages of results with 30 results per page. Therefore, the sample size is quite low. It is possible that with more data we would get a clearer picture from which to draw conclusions.
 
-<img src="images/excelTable.png" align="center">
+<p align="center">
+<img src="images/excelTable.png">
+</p>
